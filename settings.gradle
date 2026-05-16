@@ -1,0 +1,3 @@
+rootProject.name = 'Identity-platform'
+
+include 'account-service'
