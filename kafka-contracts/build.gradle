@@ -1,0 +1,23 @@
+plugins {
+    id 'java-library'
+    id 'com.github.davidmc24.gradle.plugin.avro' version '1.9.1'
+}
+
+group = 'org.todo'
+version = '0.0.1-SNAPSHOT'
+description = 'kafka-contracts'
+
+//repositories {
+//    mavenCentral()
+//}
+
+dependencies {
+    api 'org.apache.avro:avro:1.12.1'
+//    testImplementation platform('org.junit:junit-bom:6.0.0')
+//    testImplementation 'org.junit.jupiter:junit-jupiter'
+//    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+//test {
+//    useJUnitPlatform()
+//}

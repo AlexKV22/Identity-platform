@@ -7,18 +7,58 @@ group = 'org.todo'
 version = '0.0.1-SNAPSHOT'
 description = 'Identity-platform'
 
-ext {
-    set('springCloudVersion', "2025.1.1")
-}
+//ext {
+//    set('springCloudVersion', "2025.1.1")
+//}
 
 
 subprojects {
     apply plugin: 'java'
-    apply plugin: 'org.springframework.boot'
-    apply plugin: 'io.spring.dependency-management'
+
+    if (project.name != 'kafka-contracts') {
+        apply plugin: 'org.springframework.boot'
+        apply plugin: 'io.spring.dependency-management'
+
+        ext {
+            set('springCloudVersion', "2025.1.1")
+        }
+
+        dependencyManagement {
+            imports {
+                mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            }
+        }
+
+        dependencies {
+            implementation "io.confluent:kafka-avro-serializer:8.1.0"
+            implementation 'org.springframework.boot:spring-boot-starter-actuator'
+            implementation 'io.micrometer:micrometer-registry-prometheus'
+            implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+            implementation 'org.springframework.boot:spring-boot-starter-cache'
+            implementation 'org.springframework.boot:spring-boot-starter-kafka'
+            implementation 'org.springframework.boot:spring-boot-starter-validation'
+            implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+            compileOnly 'org.projectlombok:lombok'
+            developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//        developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+            annotationProcessor 'org.projectlombok:lombok'
+            testImplementation 'org.springframework.boot:spring-boot-starter-kafka-test'
+            testImplementation libs.testcontainers.kafka
+            testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+            testImplementation libs.junit.jupiter
+            testCompileOnly 'org.projectlombok:lombok'
+            testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+            testAnnotationProcessor 'org.projectlombok:lombok'
+            testImplementation 'org.awaitility:awaitility:4.2.1'
+        }
+    }
 
     repositories {
         mavenCentral()
+
+        maven {
+            url = uri("https://packages.confluent.io/maven/")
+        }
     }
 
     java {
@@ -27,39 +67,34 @@ subprojects {
         }
     }
 
-    dependencyManagement {
-        imports {
-            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-        }
-    }
+//    dependencyManagement {
+//        imports {
+//            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+//        }
+//    }
 
     tasks.withType(Test).configureEach {
         useJUnitPlatform()
     }
 
-    dependencies {
-//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        implementation 'org.springframework.boot:spring-boot-starter-kafka'
-//    implementation 'org.springframework.boot:spring-boot-starter-liquibase'
-//    implementation 'org.springframework.boot:spring-boot-starter-security'
-//    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
-//    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
-        compileOnly 'org.projectlombok:lombok'
-        developmentOnly 'org.springframework.boot:spring-boot-devtools'
-        developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
-//    runtimeOnly 'org.postgresql:postgresql'
-        annotationProcessor 'org.projectlombok:lombok'
-//        testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
-        testImplementation 'org.springframework.boot:spring-boot-starter-kafka-test'
-//    testImplementation 'org.springframework.boot:spring-boot-starter-liquibase-test'
-//    testImplementation 'org.springframework.boot:spring-boot-starter-security-test'
-//        testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
-//    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
-//        testImplementation 'org.testcontainers:testcontainers-junit-jupiter'
-        testImplementation 'org.testcontainers:testcontainers-kafka'
-//    testImplementation 'org.testcontainers:testcontainers-postgresql'
-        testCompileOnly 'org.projectlombok:lombok'
-        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-        testAnnotationProcessor 'org.projectlombok:lombok'
-    }
+//    dependencies {
+//        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+//        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+//        implementation 'org.springframework.boot:spring-boot-starter-cache'
+//        implementation 'org.springframework.boot:spring-boot-starter-kafka'
+//        implementation 'org.springframework.boot:spring-boot-starter-validation'
+//        implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+//        compileOnly 'org.projectlombok:lombok'
+//        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+////        developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+//        annotationProcessor 'org.projectlombok:lombok'
+//        testImplementation 'org.springframework.boot:spring-boot-starter-kafka-test'
+//        testImplementation libs.testcontainers.kafka
+//        testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+//        testImplementation libs.junit.jupiter
+//        testCompileOnly 'org.projectlombok:lombok'
+//        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+//        testAnnotationProcessor 'org.projectlombok:lombok'
+//        testImplementation 'org.awaitility:awaitility:4.2.1'
+//    }
 }

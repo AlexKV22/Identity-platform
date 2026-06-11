@@ -1,0 +1,30 @@
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      auto-offset-reset: latest
+      group-id: ${KAFKA_GROUP_ID}
+      topic: ${KAFKA_TOPIC}
+      enable-auto-commit: false
+      properties:
+        spring.json.use.type.headers: false
+        spring.json.value.default.type: org.todo.notificationservice.domain.dto.ListenVerificationCodeDto
+        spring.json.trusted.packages: org.todo.notificationservice.domain.dto
+    listener:
+      ack-mode: record
+
+logging:
+  level:
+    org.springframework.kafka: INFO
+    org.todo.notificationservice: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics
+
+server:
+  port: ${SERVER_PORT}

@@ -1,0 +1,5 @@
+2026-05-31 21:40:32,277 ERROR Test DLT message
+2026-05-31 23:08:13,819 ERROR DLT message. topic=verification-code-events-test-topic-dlt, partition=0, offset=0, value=null
+2026-05-31 23:11:45,789 ERROR DLT message. topic=verification-code-events-test-topic-dlt, partition=0, offset=0, value=null
+2026-05-31 23:12:24,077 ERROR DLT message. topic=verification-code-events-test-topic-dlt, partition=0, offset=0, value=null
+2026-05-31 23:30:05,388 ERROR DLT message. topic=verification-code-events-test-topic-dlt, partition=0, offset=0, value=null

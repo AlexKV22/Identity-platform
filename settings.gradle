@@ -1,3 +1,5 @@
 rootProject.name = 'Identity-platform'
 
 include 'account-service'
+include 'notification-service'
+include 'kafka-contracts'

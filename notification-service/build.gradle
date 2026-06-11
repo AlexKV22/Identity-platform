@@ -1,0 +1,12 @@
+group = 'org.todo'
+version = '0.0.1-SNAPSHOT'
+description = 'notification-service'
+
+
+dependencies {
+    implementation project(':kafka-contracts')
+//    implementation "io.confluent:kafka-avro-serializer:8.1.0"
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
+//    implementation 'io.micrometer:micrometer-registry-prometheus'
+}
+

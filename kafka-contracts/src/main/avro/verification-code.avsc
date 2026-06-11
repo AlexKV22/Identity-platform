@@ -1,0 +1,22 @@
+{
+  "type":"record",
+  "name": "VerificationCode",
+  "namespace": "org.todo.contracts",
+  "fields": [
+    {
+      "name": "eventId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "email",
+      "type": "string"
+    },
+    {
+      "name": "code",
+      "type": "int"
+    }
+  ]
+}

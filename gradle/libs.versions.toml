@@ -1,7 +1,13 @@
 [versions]
 spring-boot = "4.0.6"
 dependency-management = "1.1.7"
+testcontainers-kafka = "1.20.1"
+junit-jupiter = "1.20.1"
 
 [plugins]
 dependency-management = {id = "io.spring.dependency-management", version.ref = "dependency-management"}
 spring-boot = {id = "org.springframework.boot", version.ref = "spring-boot"}
+
+[libraries]
+testcontainers-kafka = {module = "org.testcontainers:kafka", version.ref = "testcontainers-kafka"}
+junit-jupiter = {module = "org.testcontainers:junit-jupiter", version.ref = "junit-jupiter"}
