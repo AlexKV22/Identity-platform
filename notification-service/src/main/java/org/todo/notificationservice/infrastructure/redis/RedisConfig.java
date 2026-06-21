@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.todo.notificationservice.domain.dto.ListenVerificationCodeDto;
 
 @Configuration
 public class RedisConfig {
@@ -17,8 +16,8 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisTemplate<String, ListenVerificationCodeDto> redisTemplate() {
-        RedisTemplate<String, ListenVerificationCodeDto> redisTemplate = new RedisTemplate<>();
+    public RedisTemplate<String, String> redisTemplate() {
+        RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new StringRedisSerializer());

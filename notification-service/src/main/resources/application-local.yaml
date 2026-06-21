@@ -2,21 +2,25 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       auto-offset-reset: latest
       group-id: notification-service-local
 #      topic: verification-code-events-local
       topic: test-topic
       enable-auto-commit: false
       properties:
-        schema.registry.url: http://localhost:8085
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: io.confluent.kafka.serializers.KafkaAvroDeserializer
+#        schema.registry.url: http://localhost:8085
         specific.avro.reader: true
-        spring.json.use.type.headers: false
+#        spring.json.use.type.headers: false
 #        spring.json.value.default.type: org.todo.notificationservice.domain.dto.ListenVerificationCodeDto
 #        spring.json.trusted.packages: org.todo.notificationservice.domain.dto
     listener:
       ack-mode: record
+    properties:
+      schema.registry.url: http://localhost:8085
 
 logging:
   level:

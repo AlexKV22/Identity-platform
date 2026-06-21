@@ -17,14 +17,13 @@ public class DltTopicListener {
         this.notificationMetrics = notificationMetrics;
     }
 
-    @KafkaListener(topics = "${spring.kafka.consumer.topic}-dlt")
+    @KafkaListener(topics = "${spring.kafka.consumer.topic}-dlt", containerFactory = "dltKafkaListenerContainerFactory")
     public void listen(ConsumerRecord<?, ?> record) {
         logger.error(
-                "DLT message. topic={}, partition={}, offset={}, value={}",
+                "DLT message. topic={}, partition={}, offset={}",
                 record.topic(),
                 record.partition(),
-                record.offset(),
-                record.value()
+                record.offset()
         );
         notificationMetrics.incrementDltCounter();
     }
